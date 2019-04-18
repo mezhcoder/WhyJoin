@@ -1,3 +1,4 @@
 addMoney: 100
-startVersion: 112
 Message: "&fВам начислено &e%money% &fмонеток."
+validVersion:
+- 112

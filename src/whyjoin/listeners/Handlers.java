@@ -9,29 +9,38 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import us.myles.ViaVersion.ViaVersionPlugin;
 import whyjoin.utils.MessageControl;
 
+import java.util.List;
+
 public class Handlers implements Listener {
 
     private ViaVersionPlugin viaVersionPlugin;
     private Economy economy;
     private FileConfiguration config;
 
+    private List<Integer> validVersion;
+
     public Handlers(ViaVersionPlugin viaVersionPlugin, Economy economy, FileConfiguration config) {
         this.viaVersionPlugin = viaVersionPlugin;
         this.economy = economy;
         this.config = config;
+        this.validVersion = config.getIntegerList("validVersion");
     }
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        int version = viaVersionPlugin.getApi().getPlayerVersion(player);
-        int minVersion = config.getInt("startVersion");
+        if (checkValidVersion(player)) reward(player);
+    }
 
-        if (version >= minVersion) {
-            double addMoney= config.getDouble("addMoney");
-            MessageControl.sendMessage(player, config.getString("Message").replace("%money%", String.valueOf(addMoney)));
-            economy.depositPlayer(player, addMoney);
-        }
+    private boolean checkValidVersion(Player player) {
+        int version = viaVersionPlugin.getApi().getPlayerVersion(player);
+        return validVersion.contains(version);
+    }
+
+    private void reward(Player player) {
+        double addMoney= config.getDouble("addMoney");
+        MessageControl.sendMessage(player, config.getString("Message").replace("%money%", String.valueOf(addMoney)));
+        economy.depositPlayer(player, addMoney);
     }
 
 }
