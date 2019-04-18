@@ -17,13 +17,13 @@ public class Handlers implements Listener {
     private Economy economy;
     private FileConfiguration config;
 
-    private List<Integer> validVersion;
+    private List<Integer> validProtocolVersion;
 
     public Handlers(ViaVersionPlugin viaVersionPlugin, Economy economy, FileConfiguration config) {
         this.viaVersionPlugin = viaVersionPlugin;
         this.economy = economy;
         this.config = config;
-        this.validVersion = config.getIntegerList("validVersion");
+        this.validProtocolVersion = config.getIntegerList("validProtocolVersion");
     }
 
     @EventHandler
@@ -34,7 +34,7 @@ public class Handlers implements Listener {
 
     private boolean checkValidVersion(Player player) {
         int version = viaVersionPlugin.getApi().getPlayerVersion(player);
-        return validVersion.contains(version);
+        return validProtocolVersion.contains(version);
     }
 
     private void reward(Player player) {

@@ -1,4 +1,5 @@
+#viki.vg/Protocol_version_numbers
 addMoney: 100
 Message: "&fВам начислено &e%money% &fмонеток."
-validVersion:
-- 112
+validProtocolVersion:
+- 340
