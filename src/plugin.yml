@@ -1,0 +1,5 @@
+name: WhyJoin
+main: whyjoin.Main
+version: 1.0
+author: zhcoder
+depend: [ViaVersion, Vault]
