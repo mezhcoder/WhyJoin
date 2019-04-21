@@ -1,3 +1,3 @@
 # WhyJoin
-MineCraft plugin. He can load and work.
+MineCraft plugin. It can load and work.
 Dependencies: ViaVersion, Vault
